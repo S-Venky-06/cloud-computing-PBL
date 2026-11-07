@@ -1,0 +1,20 @@
+{
+  "name": "serverless-online-quiz-application",
+  "version": "1.0.0",
+  "description": "Serverless Online Quiz Application built with AWS Lambda, API Gateway, and DynamoDB for Cloud Computing PBL",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "seed": "node backend/scripts/seed.mjs"
+  },
+  "keywords": [
+    "aws",
+    "serverless",
+    "lambda",
+    "api-gateway",
+    "dynamodb",
+    "cloud-computing-pbl"
+  ],
+  "author": "Student",
+  "license": "MIT"
+}

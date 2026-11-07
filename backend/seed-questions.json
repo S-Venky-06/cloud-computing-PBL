@@ -1,0 +1,122 @@
+[
+  {
+    "quizId": "aws-cloud-basics",
+    "questionId": "q1",
+    "question": "Which AWS service is designed to provide resizable, virtual compute capacity in the cloud?",
+    "options": ["Amazon S3", "Amazon EC2", "AWS Lambda", "Amazon RDS"],
+    "correctAnswer": "Amazon EC2",
+    "explanation": "Amazon EC2 (Elastic Compute Cloud) provides scalable virtual servers (instances) on demand."
+  },
+  {
+    "quizId": "aws-cloud-basics",
+    "questionId": "q2",
+    "question": "What is the primary storage type provided by Amazon S3?",
+    "options": ["Block Storage", "File Storage", "Object Storage", "Relational Database"],
+    "correctAnswer": "Object Storage",
+    "explanation": "Amazon S3 is an object storage service offering industry-leading scalability, data availability, and performance."
+  },
+  {
+    "quizId": "aws-cloud-basics",
+    "questionId": "q3",
+    "question": "According to the AWS Shared Responsibility Model, which of the following is the customer's responsibility?",
+    "options": ["Physical datacenter security", "Hardware maintenance", "Customer Data and IAM management", "Virtualization layer patching"],
+    "correctAnswer": "Customer Data and IAM management",
+    "explanation": "AWS is responsible for 'Security OF the Cloud' (hardware, facilities), while the customer is responsible for 'Security IN the Cloud' (data, IAM, firewalls)."
+  },
+  {
+    "quizId": "aws-cloud-basics",
+    "questionId": "q4",
+    "question": "Which cloud computing deployment model allows organizations to run infrastructure both on-premises and in the public cloud?",
+    "options": ["Private Cloud", "Public Cloud", "Hybrid Cloud", "Community Cloud"],
+    "correctAnswer": "Hybrid Cloud",
+    "explanation": "A hybrid cloud connects an organization's on-premises infrastructure with public cloud services."
+  },
+  {
+    "quizId": "aws-cloud-basics",
+    "questionId": "q5",
+    "question": "Which AWS pricing model allows you to pay only for what you consume without long-term commitments?",
+    "options": ["Reserved Instances", "Pay-as-you-go (On-Demand)", "Savings Plans", "Dedicated Hosts"],
+    "correctAnswer": "Pay-as-you-go (On-Demand)",
+    "explanation": "AWS pay-as-you-go pricing enables you to adapt to changing business needs without over-committing budgets."
+  },
+  {
+    "quizId": "serverless-deep-dive",
+    "questionId": "q1",
+    "question": "What is the primary advantage of AWS Lambda over Amazon EC2?",
+    "options": ["Full operating system control", "No server management and pay per invocation", "Fixed monthly pricing", "Continuous background processes"],
+    "correctAnswer": "No server management and pay per invocation",
+    "explanation": "AWS Lambda is serverless; you run code without provisioning servers and pay only for compute time consumed."
+  },
+  {
+    "quizId": "serverless-deep-dive",
+    "questionId": "q2",
+    "question": "In Amazon DynamoDB, which key uniquely identifies each item in a table with a composite primary key?",
+    "options": ["Partition Key only", "Sort Key only", "Partition Key and Sort Key combination", "Global Secondary Index"],
+    "correctAnswer": "Partition Key and Sort Key combination",
+    "explanation": "In a table with a composite primary key, the combination of Partition Key (HASH) and Sort Key (RANGE) uniquely identifies each item."
+  },
+  {
+    "quizId": "serverless-deep-dive",
+    "questionId": "q3",
+    "question": "What term describes the slight delay when a Lambda function is invoked for the first time after being idle?",
+    "options": ["Warm boot", "Cold start", "Throttling latency", "Zombie process"],
+    "correctAnswer": "Cold start",
+    "explanation": "A cold start happens when Lambda initializes a new execution environment for a function container."
+  },
+  {
+    "quizId": "serverless-deep-dive",
+    "questionId": "q4",
+    "question": "Which AWS service acts as a 'front door' for applications to access backend services like Lambda?",
+    "options": ["Amazon Route 53", "Amazon API Gateway", "Elastic Load Balancing", "AWS Direct Connect"],
+    "correctAnswer": "Amazon API Gateway",
+    "explanation": "Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, and secure APIs at any scale."
+  },
+  {
+    "quizId": "serverless-deep-dive",
+    "questionId": "q5",
+    "question": "Which billing mode in Amazon DynamoDB automatically scales throughput and charges only for read/write requests made?",
+    "options": ["Provisioned Capacity", "On-Demand (Pay-Per-Request)", "Reserved Capacity", "Free-Forever Tier only"],
+    "correctAnswer": "On-Demand (Pay-Per-Request)",
+    "explanation": "On-Demand mode accommodates unpredictable workloads with zero capacity planning, charging per read/write unit."
+  },
+  {
+    "quizId": "cloud-security-iam",
+    "questionId": "q1",
+    "question": "What is the core security principle of granting users only the minimum permissions necessary to perform their job?",
+    "options": ["Defense in Depth", "Principle of Least Privilege", "Separation of Duties", "Zero-Knowledge Architecture"],
+    "correctAnswer": "Principle of Least Privilege",
+    "explanation": "The Principle of Least Privilege (PoLP) ensures entities have only the permissions required to complete assigned tasks."
+  },
+  {
+    "quizId": "cloud-security-iam",
+    "questionId": "q2",
+    "question": "Which AWS IAM entity is meant to be assumed by trusted entities (like an AWS Lambda function) rather than an individual person?",
+    "options": ["IAM User", "IAM Group", "IAM Role", "IAM Root Account"],
+    "correctAnswer": "IAM Role",
+    "explanation": "An IAM Role is an identity with permission policies that determine what the role can and cannot do in AWS, assumed by services or users."
+  },
+  {
+    "quizId": "cloud-security-iam",
+    "questionId": "q3",
+    "question": "Which AWS service provides visibility into user activity by recording AWS Management Console actions and API calls?",
+    "options": ["AWS CloudWatch", "AWS CloudTrail", "AWS Shield", "Amazon Inspector"],
+    "correctAnswer": "AWS CloudTrail",
+    "explanation": "AWS CloudTrail records API calls and account activity across your AWS infrastructure for governance, compliance, and auditing."
+  },
+  {
+    "quizId": "cloud-security-iam",
+    "questionId": "q4",
+    "question": "In AWS networking, what acts as a virtual firewall at the instance level to control inbound and outbound traffic?",
+    "options": ["Network ACL (NACL)", "Security Group", "NAT Gateway", "Internet Gateway"],
+    "correctAnswer": "Security Group",
+    "explanation": "Security Groups operate at the instance level as stateful firewalls controlling inbound and outbound traffic."
+  },
+  {
+    "quizId": "cloud-security-iam",
+    "questionId": "q5",
+    "question": "Which mechanism ensures that a web application running in a browser can safely call an API Gateway on a different domain?",
+    "options": ["CORS (Cross-Origin Resource Sharing)", "DNSSEC", "SSL Offloading", "VPC Peering"],
+    "correctAnswer": "CORS (Cross-Origin Resource Sharing)",
+    "explanation": "CORS is an HTTP-header-based mechanism that allows a server to indicate any origins other than its own from which a browser should permit loading resources."
+  }
+]

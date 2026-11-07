@@ -1,0 +1,123 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Serverless Online Quiz Application (AWS Lambda, API Gateway, DynamoDB)
+  Cloud Computing PBL Project - 100% Free Tier Eligible
+
+Globals:
+  Function:
+    Timeout: 15
+    MemorySize: 256
+    Runtime: nodejs20.x
+
+Resources:
+  # DynamoDB Table 1: QuizQuestions
+  QuizQuestionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: QuizQuestions
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: quizId
+          AttributeType: S
+        - AttributeName: questionId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: quizId
+          KeyType: HASH
+        - AttributeName: questionId
+          KeyType: RANGE
+
+  # DynamoDB Table 2: QuizResults
+  QuizResultsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: QuizResults
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: quizId
+          AttributeType: S
+        - AttributeName: resultId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: quizId
+          KeyType: HASH
+        - AttributeName: resultId
+          KeyType: RANGE
+
+  # IAM Execution Role for Lambda
+  QuizLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: CCQuizLambdaRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DynamoDBReadWriteAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                Resource:
+                  - !GetAtt QuizQuestionsTable.Arn
+                  - !GetAtt QuizResultsTable.Arn
+                  - !Sub "${QuizQuestionsTable.Arn}/*"
+                  - !Sub "${QuizResultsTable.Arn}/*"
+
+  # AWS Lambda Function
+  QuizFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: CCQuizHandler
+      Handler: index.handler
+      CodeUri: ../backend/lambda/
+      Role: !GetAtt QuizLambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          QUESTIONS_TABLE: !Ref QuizQuestionsTable
+          RESULTS_TABLE: !Ref QuizResultsTable
+      Events:
+        HttpApiRoute:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref QuizHttpApi
+            Route: $default
+
+  # Amazon API Gateway (HTTP API v2)
+  QuizHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Name: CCQuizAPI
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - '*'
+
+Outputs:
+  ApiEndpoint:
+    Description: "HTTP API Gateway endpoint URL"
+    Value: !Sub "https://${QuizHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+  QuizQuestionsTableArn:
+    Description: "DynamoDB Questions Table ARN"
+    Value: !GetAtt QuizQuestionsTable.Arn
+  QuizResultsTableArn:
+    Description: "DynamoDB Results Table ARN"
+    Value: !GetAtt QuizResultsTable.Arn

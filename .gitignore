@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+backend/scripts/temp_item.json
+backend/response.json
+backend/test-event.json
+backend/sample.json
